@@ -9,14 +9,14 @@ menu = """
 
 => """
 
-contas = []  # Lista de contas
-clientes = []  # Lista de clientes
+contas = []  
+clientes = []  
 id_conta = 1
 id_cliente = 1
-LIMITE_SAQUE = 500  # Valor máximo por saque
-MAX_SAQUES_DIARIOS = 3  # Número máximo de saques por dia
-historico_saques = {}  # Contador de saques diários por conta
-extratos = {}  # Histórico de transações para cada conta
+LIMITE_SAQUE = 500  
+MAX_SAQUES_DIARIOS = 3  
+historico_saques = {}  
+extratos = {}  
 
 def listar_contas():
     if not contas:
@@ -55,7 +55,7 @@ def obter_id_valido(mensagem):
 while True:
     opcao = input(menu)
 
-    if opcao == "c":  # Cadastrar Cliente
+    if opcao == "c":  
         nome = input("\nNome do cliente: ")
         cpf = input("CPF do cliente: ")
 
@@ -63,7 +63,7 @@ while True:
         print(f"✅ Cliente cadastrado com sucesso! ID: {id_cliente}")
         id_cliente += 1
 
-    elif opcao == "p":  # Cadastrar Conta
+    elif opcao == "p":  
         listar_clientes()
         if not clientes:
             continue
@@ -80,14 +80,14 @@ while True:
                 "Cliente": cliente
             }
             contas.append(nova_conta)
-            historico_saques[id_conta] = 0  # Inicia o contador de saques da conta
-            extratos[id_conta] = []  # Inicia o extrato da conta
+            historico_saques[id_conta] = 0  
+            extratos[id_conta] = []  
             print(f"✅ Conta criada com sucesso! Número da Conta: {numero_conta}")
             id_conta += 1
         else:
             print("❌ Cliente não encontrado.")
 
-    elif opcao == "d":  # Depositar
+    elif opcao == "d": 
         listar_contas()
         if not contas:
             continue
@@ -103,12 +103,12 @@ while True:
                 continue
 
             conta["Saldo"] += valor
-            extratos[id_conta_escolhida].append(f"+ R$ {valor:.2f}")  # Adiciona ao extrato
+            extratos[id_conta_escolhida].append(f"+ R$ {valor:.2f}")  
             print(f"✅ Depósito realizado! Novo saldo: R$ {conta['Saldo']:.2f}")
         else:
             print("❌ Conta não encontrada.")
 
-    elif opcao == "s":  # Sacar
+    elif opcao == "s":  
         listar_contas()
         if not contas:
             continue
@@ -132,12 +132,12 @@ while True:
             else:
                 conta["Saldo"] -= valor
                 historico_saques[id_conta_escolhida] += 1
-                extratos[id_conta_escolhida].append(f"- R$ {valor:.2f}")  # Adiciona saque ao extrato
+                extratos[id_conta_escolhida].append(f"- R$ {valor:.2f}")  
                 print(f"✅ Saque realizado! Novo saldo: R$ {conta['Saldo']:.2f}")
         else:
             print("❌ Conta não encontrada.")
 
-    elif opcao == "e":  # Extrato
+    elif opcao == "e":  
         listar_contas()
         if not contas:
             continue
